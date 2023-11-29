@@ -16,6 +16,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
   const router = useRouter()
   const { photoId } = router.query
   const [lastViewedPhoto, setLastViewedPhoto] = useLastViewedPhoto()
+  const currentYear = new Date().getFullYear();
 
   const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null)
 
@@ -30,7 +31,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
   return (
     <>
       <Head>
-        <title>Next.js Conf 2022 Photos</title>
+        <title>Ravenwood AI Gallery</title>
         <meta
           property="og:image"
           content="https://nextjsconf-pics.vercel.app/og-image.png"
@@ -59,20 +60,17 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
             </div>
             <Logo />
             <h1 className="mt-8 mb-4 text-base font-bold uppercase tracking-widest">
-              2022 Event Photos
+              Dall E 3 Artificial Intelligence
             </h1>
             <p className="max-w-[40ch] text-white/75 sm:max-w-[32ch]">
-              Our incredible Next.js community got together in San Francisco for
-              our first ever in-person conference!
+              Experience the craze that is AI generated art! Browse and share to your hearts content. Join and create with us!
             </p>
-            <a
+            <Link
               className="pointer z-10 mt-6 rounded-lg border border-white bg-white px-3 py-2 text-sm font-semibold text-black transition hover:bg-white/10 hover:text-white md:mt-4"
-              href="https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-cloudinary&project-name=nextjs-image-gallery&repository-name=with-cloudinary&env=NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,CLOUDINARY_API_KEY,CLOUDINARY_API_SECRET,CLOUDINARY_FOLDER&envDescription=API%20Keys%20from%20Cloudinary%20needed%20to%20run%20this%20application"
-              target="_blank"
-              rel="noreferrer"
+              href="#"
             >
-              Clone and Deploy
-            </a>
+              Sign Up Available Soon
+            </Link>
           </div>
           {images.map(({ id, public_id, format, blurDataUrl }) => (
             <Link
@@ -102,34 +100,13 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
         </div>
       </main>
       <footer className="p-6 text-center text-white/80 sm:p-12">
-        Thank you to{' '}
-        <a
-          href="https://edelsonphotography.com/"
-          target="_blank"
-          className="font-semibold hover:text-white"
-          rel="noreferrer"
-        >
-          Josh Edelson
-        </a>
-        ,{' '}
-        <a
-          href="https://www.newrevmedia.com/"
-          target="_blank"
-          className="font-semibold hover:text-white"
-          rel="noreferrer"
-        >
-          Jenny Morgan
-        </a>
-        , and{' '}
-        <a
-          href="https://www.garysextonphotography.com/"
-          target="_blank"
-          className="font-semibold hover:text-white"
-          rel="noreferrer"
-        >
-          Gary Sexton
-        </a>{' '}
-        for the pictures.
+        Thank you to for your support!
+        <p className="text-gray-500">
+            Copyright &copy; {currentYear}{" "}
+            <span className="font-medium text-gray-800 underline transition-colors">
+              Ravenwood Creations
+            </span>
+          </p>
       </footer>
     </>
   )
