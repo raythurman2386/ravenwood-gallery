@@ -11,5 +11,5 @@ export default function Logo() {
     >
       SOME LOGO WILL BE HERE
     </svg>
-  )
+  );
 }

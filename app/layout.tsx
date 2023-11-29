@@ -1,5 +1,5 @@
 import { GeistSans } from "geist/font/sans";
-import '../styles/index.css'
+import "../styles/index.css";
 
 export const metadata = {
   title: "Gallery | Ravenwood Creations",
@@ -36,12 +36,10 @@ export const metadata = {
   metadataBase: new URL("https://www.ravenwood-gallery.vercel.app"),
 };
 
-export default function RootLayout({
-  children,
-}) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`bg-black ${GeistSans.className} antialiased`}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
