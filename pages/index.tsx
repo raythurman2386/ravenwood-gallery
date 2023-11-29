@@ -32,7 +32,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
   return (
     <>
       <Head>
-        {/* <title>Ravenwood AI Gallery</title>
+        <title>Ravenwood AI Gallery</title>
         <meta
           property="og:image"
           content="https://ravenwood-gallery.vercel.app/og-image.png"
@@ -40,7 +40,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
         <meta
           name="twitter:image"
           content="https://ravenwood-gallery.vercel.app/og-image.png"
-        /> */}
+        />
       </Head>
       <main className={`mx-auto max-w-[1960px] p-4`}>
         {photoId && (
