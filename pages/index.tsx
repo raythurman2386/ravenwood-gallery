@@ -1,16 +1,16 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import {useEffect, useRef} from "react";
-import Bridge from "../components/Icons/Bridge";
-import Logo from "../components/Icons/Logo";
-import Modal from "../components/Modal";
-import cloudinary from "../utils/cloudinary";
-import getBase64ImageUrl from "../utils/generateBlurPlaceholder";
-import type { ImageProps } from "../utils/types";
-import { useLastViewedPhoto } from "../utils/useLastViewedPhoto";
-import { CldImage } from "next-cloudinary";
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect, useRef } from 'react'
+import Bridge from '../components/Icons/Bridge'
+import Logo from '../components/Icons/Logo'
+import Modal from '../components/Modal'
+import cloudinary from '../utils/cloudinary'
+import getBase64ImageUrl from '../utils/generateBlurPlaceholder'
+import type { ImageProps } from '../utils/types'
+import { useLastViewedPhoto } from '../utils/useLastViewedPhoto'
+import { CldImage } from 'next-cloudinary'
 
 const Home: NextPage = ({
     images,
@@ -157,56 +157,56 @@ const Home: NextPage = ({
 export default Home
 
 export async function getServerSideProps({ query }) {
-    const page = parseInt(query.page as string) || 1;
-    const imagesPerPage = 20; // Adjust this number as needed
+    const page = parseInt(query.page as string) || 1
+    const imagesPerPage = 20 // Adjust this number as needed
 
-    let results;
-    let nextCursor = null;
+    let results
+    let nextCursor = null
 
     if (page === 1) {
         results = await cloudinary.v2.search
             .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
-            .sort_by("public_id", "desc")
+            .sort_by('public_id', 'desc')
             .max_results(imagesPerPage)
-            .execute();
+            .execute()
     } else {
         const prevPageResults = await cloudinary.v2.search
             .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
-            .sort_by("public_id", "desc")
+            .sort_by('public_id', 'desc')
             .max_results(imagesPerPage * (page - 1))
-            .execute();
+            .execute()
 
-        nextCursor = prevPageResults.next_cursor;
+        nextCursor = prevPageResults.next_cursor
 
         results = await cloudinary.v2.search
             .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
-            .sort_by("public_id", "desc")
+            .sort_by('public_id', 'desc')
             .max_results(imagesPerPage)
             .next_cursor(nextCursor)
-            .execute();
+            .execute()
     }
 
-    let reducedResults: ImageProps[] = [];
+    let reducedResults: ImageProps[] = []
 
-    let i = 0;
+    let i = 0
     for (let result of results.resources) {
         reducedResults.push({
             id: i,
             height: result.height,
             width: result.width,
             public_id: result.public_id,
-            format: result.format,
-        });
-        i++;
+            format: result.format
+        })
+        i++
     }
 
     const blurImagePromises = results.resources.map((image: ImageProps) => {
-        return getBase64ImageUrl(image);
-    });
-    const imagesWithBlurDataUrls = await Promise.all(blurImagePromises);
+        return getBase64ImageUrl(image)
+    })
+    const imagesWithBlurDataUrls = await Promise.all(blurImagePromises)
 
     for (let i = 0; i < reducedResults.length; i++) {
-        reducedResults[i].blurDataUrl = imagesWithBlurDataUrls[i];
+        reducedResults[i].blurDataUrl = imagesWithBlurDataUrls[i]
     }
 
     return {
@@ -215,7 +215,7 @@ export async function getServerSideProps({ query }) {
             totalImages: results.total_count,
             currentPage: page,
             imagesPerPage,
-            nextCursor: results.next_cursor || null,
-        },
-    };
+            nextCursor: results.next_cursor || null
+        }
+    }
 }

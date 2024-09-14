@@ -4,7 +4,7 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "format:write": "prettier --write \"{app,lib,components}/**/*.{ts,tsx,mdx}\" --cache",
+        "format:write": "prettier --write \"{app,lib,components,pages}/**/*.{ts,tsx,mdx}\" --cache",
         "lint": "next lint"
     },
     "dependencies": {
