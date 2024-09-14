@@ -84,11 +84,11 @@ const Home: NextPage = ({
                         </p>
                         <Link
                             className="pointer z-10 mt-6 rounded-lg border border-white bg-white px-3 py-2 text-sm font-semibold text-black transition hover:bg-white/10 hover:text-white md:mt-4"
-                            href="https://ravenwood-creations.printify.me/products"
+                            href={process.env.NEXT_PUBLIC_DISCORD_INVITE}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            Visit Store
+                            Join Discord
                         </Link>
                     </div>
                     {images.map(({ id, public_id, format, blurDataUrl }) => (
